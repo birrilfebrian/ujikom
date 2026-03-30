@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Daftar Buku')
+@section('title', 'Daftar Penulis')
 
 @section('content')
 <div class="container-fluid">
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center bg-white py-3">
-            <h5 class="mb-0 font-weight-bold text-primary">Kelola Data Buku</h5>
-            <a href="{{ route('buku.create') }}" class="btn btn-primary btn-sm">
-                <i class="fas fa-plus"></i> Tambah Buku
+            <h5 class="mb-0 font-weight-bold text-primary">Kelola Data Penulis</h5>
+            <a href="{{ route('penulis.create') }}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Tambah Penulis
             </a>
         </div>
         <div class="card-body">
@@ -27,28 +27,30 @@
                     <thead class="thead-light">
                         <tr>
                             <th width="5%">No</th>
-                            <th>Judul Buku</th>
-                            <th>Penulis</th>
-                            <th>Penerbit</th>
-                            <th>Stok</th>
+                            <th>Nama Penulis</th>
+                            <th>Biografi</th>
+                            <th width="15%">Total Buku</th>
                             <th width="15%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($bukus as $key => $buku)
+                        @forelse($penulises as $key => $p)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $buku->judul }}</td>
-                            <td>{{ $buku->penulis }}</td>
-                            <td>{{ $buku->penerbit }}</td>
-                            <td>{{ $buku->stok }}</td>
+                            <td><strong>{{ $p->nama_penulis }}</strong></td>
+                            <td>{{ Str::limit($p->biografi, 50) }}</td>
+                            <td>
+                                <span class="badge badge-info">
+                                    {{ $p->bukus->count() }} Buku
+                                </span>
+                            </td>
                             <td>
                                 <div class="d-flex shadow-sm">
-                                    <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning btn-sm mr-2 text-white">
+                                    <a href="{{ route('penulis.edit', $p->id) }}" class="btn btn-warning btn-sm mr-2 text-white">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     
-                                    <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                                    <form action="{{ route('penulis.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Menghapus penulis akan berdampak pada data buku mereka. Yakin?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -60,7 +62,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted py-4">Data buku belum tersedia.</td>
+                            <td colspan="5" class="text-center text-muted py-4">Data penulis belum tersedia.</td>
                         </tr>
                         @endforelse
                     </tbody>
