@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('anggotas', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->string('email')->unique();
-        $table->text('alamat');
-        $table->date('tgl_registrasi');
-        $table->timestamps();
-    });
+            $table->id();
+            $table->string('nama');
+            $table->string('email')->unique()->nullable();
+            $table->text('alamat')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

@@ -11,20 +11,20 @@
                     <h5 class="mb-0 font-weight-bold text-primary">Tambah Data Buku</h5>
                 </div>
                 <div class="card-body">
-                    
+
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
                     <form action="{{ route('buku.store') }}" method="POST">
                         @csrf
-                        
+
                         <div class="form-group mb-3">
                             <label for="judul" class="font-weight-bold">Judul Buku</label>
                             <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul') }}" placeholder="Masukkan judul buku" required>
@@ -32,37 +32,37 @@
 
                         <div class="row">
                             <div class="col-md-6">
-    <div class="form-group mb-3">
-        <label for="penulis_id" class="font-weight-bold">Penulis</label>
-        <select name="penulis_id" class="form-control @error('penulis_id') is-invalid @enderror" required>
-            <option value="">-- Pilih Penulis --</option>
-            @foreach($penulis as $p)
-                <option value="{{ $p->id }}" @selected(old('penulis_id') == $p->id)>
-                    {{ $p->nama_penulis }}
-                </option>
-            @endforeach
-        </select>
-        @error('penulis_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
-<div class="col-md-6">
-                            <div class="form-group mb-3">
-        <label for="kategoris_id" class="font-weight-bold">Kategori</label>
-        <select name="kategoris_id" class="form-control @error('kategoris_id') is-invalid @enderror" required>
-            <option value="">-- Pilih Kategori --</option>
-            @foreach($kategoris as $k)
-                <option value="{{ $k->id }}" @selected(old('kategoris_id') == $p->id)>
-                    {{ $k->nama_kategori }}
-                </option>
-            @endforeach
-        </select>
-        @error('kategoris_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
+                                <div class="form-group mb-3">
+                                    <label for="penulis_id" class="font-weight-bold">Penulis</label>
+                                    <select name="penulis_id" class="form-control @error('penulis_id') is-invalid @enderror" required>
+                                        <option value="">-- Pilih Penulis --</option>
+                                        @foreach($penulis as $p)
+                                        <option value="{{ $p->id }}" @selected(old('penulis_id')==$p->id)>
+                                            {{ $p->nama_penulis }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('penulis_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="kategori_id" class="font-weight-bold">Kategori</label>
+                                    <select name="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror" required>
+                                        <option value="">-- Pilih Kategori --</option>
+                                        @foreach($kategoris as $k)
+                                        <option value="{{ $k->id }}" @selected(old('kategori_id')==$k->id)>
+                                            {{ $k->nama_kategori }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('kategori_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
